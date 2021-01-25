@@ -300,13 +300,13 @@ CONFIG=/boot/config.txt
 [ -f /boot/firmware/usercfg.txt ] && CONFIG=/boot/firmware/usercfg.txt
 echo -e "\n### Found boot configuration file $CONFIG"
 
-sed -i -e 's:#dtparam=i2c_arm=on:dtparam=i2c_arm=on:g'  $CONFIG || true
+#sed -i -e 's:#dtparam=i2c_arm=on:dtparam=i2c_arm=on:g'  $CONFIG || true
 grep -q "^dtoverlay=i2s-mmap$" $CONFIG || \
   echo "dtoverlay=i2s-mmap" >> $CONFIG
 
-
+#enable i2c here, otherwise this won't work
 grep -q "^dtparam=i2s=on$" $CONFIG || \
-  echo "dtparam=i2s=on" >> $CONFIG
+  echo "dtparam=i2c,i2s" >> $CONFIG
 
 #install config files
 echo -e "\n### Install alsa and widget configuration"
