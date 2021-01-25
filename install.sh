@@ -27,7 +27,7 @@ fi
 
 #
 # make sure that we are on something ARM/Raspberry related
-# either a bare metal Raspberry or a qemu session with 
+# either a bare metal Raspberry or a qemu session with
 # Raspberry stuff available
 # - check for /boot/overlays
 # - dtparam and dtoverlay is available
@@ -238,7 +238,7 @@ fi
 # Arch Linux
 which pacman &>/dev/null
 if [[ $? -eq 0 ]]; then
-  pacman -Syu --needed git gcc automake make dkms linux-raspberrypi-headers i2c-tools
+  pacman -Syu --needed git gcc automake make dkms linux-rpi4-headers i2c-tools
 fi
 
 # locate currently installed kernels (may be different to running kernel if
@@ -247,7 +247,7 @@ base_ver=$(get_kernel_version)
 base_ver=${base_ver%%[-+]*}
 # kernels="${base_ver}+ ${base_ver}-v7+ ${base_ver}-v7l+"
 # select exact kernel postfix
-kernels=${base_ver}$(echo $uname_r | sed -re 's/^[0-9.]+(.*)/\1/g')
+kernels=${base_ver}$(echo $uname_r)
 
 function install_module {
   local _i
@@ -293,7 +293,7 @@ grep -q "^snd-soc-seeed-voicecard$" /etc/modules || \
 grep -q "^snd-soc-ac108$" /etc/modules || \
   echo "snd-soc-ac108" >> /etc/modules
 grep -q "^snd-soc-wm8960$" /etc/modules || \
-  echo "snd-soc-wm8960" >> /etc/modules  
+  echo "snd-soc-wm8960" >> /etc/modules
 
 #set dtoverlays
 CONFIG=/boot/config.txt
@@ -334,7 +334,7 @@ echo -e "\n### Start service seeed-voicecard"
 echo -e "    see /var/log/seeed-voicecard.log for more service information"
 cp seeed-voicecard /usr/bin/
 cp seeed-voicecard.service /lib/systemd/system/
-systemctl enable  seeed-voicecard.service 
+systemctl enable  seeed-voicecard.service
 systemctl start   seeed-voicecard
 
 echo "------------------------------------------------------"
