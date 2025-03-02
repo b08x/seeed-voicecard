@@ -31,8 +31,8 @@ else
 fi
 
 # Detect OS and set variables
-if grep -q 'ID=raspbian' /etc/os-release; then
-    OS="raspbian"
+if grep -q 'ID=debian' /etc/os-release; then
+    OS="debian"
     KERNEL_PKG="raspberrypi-kernel"
     HEADERS_PKG="raspberrypi-kernel-headers"
 elif grep -q 'ID=ubuntu' /etc/os-release; then
